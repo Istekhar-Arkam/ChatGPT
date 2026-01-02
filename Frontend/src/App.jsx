@@ -1,8 +1,8 @@
 import Sidebar from "./Components/Sidebar.jsx";
 import { Routes, Route } from "react-router-dom";
 import ChatBox from "./Components/ChatBox.jsx";
-import Credits from "./Components/Credits.jsx";
-import Community from "./Components/Community.jsx";
+import Credits from "./Pages/Credits.jsx"
+import Community from "./Pages/Community.jsx";
 
 function App() {
   return (
