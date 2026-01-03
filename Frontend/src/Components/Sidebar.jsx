@@ -36,9 +36,11 @@ const Sidebar = () => {
         />
       </div>
 
-      {/* recents chats */}
+      {/* Recent chats */}
 
-      {chats.length > 0 && <p className="mt-4 text-sm">Recent Chats</p>}
+      {chats.length > 0 && (
+        <p className="mt-4 text-sm dark:invert">Recent Chats</p>
+      )}
 
       <div className="flex-1 overflow-y-scroll mt-3 text-sm space-y-3">
         {chats
@@ -55,7 +57,7 @@ const Sidebar = () => {
               className="p-2 px-4 dark:bg-[#57317C]/10 border border-gray-300 dark:border-[#80609F]/15 rounded-md cursor-pointer flex justify-between group"
             >
               <div>
-                <p className="truncate w-full">
+                <p className="truncate w-full dark:invert">
                   {chat.messages.length > 0
                     ? chat.messages[0].content.slice(0, 32)
                     : chat.name}
@@ -84,7 +86,7 @@ const Sidebar = () => {
           alt=""
         />
         <div className="flex flex-col text-sm">
-          <p className="capitalize">community images</p>
+          <p className="dark:invert capitalize">community images</p>
         </div>
       </div>
 
@@ -97,11 +99,35 @@ const Sidebar = () => {
       >
         <img src={assets.diamond_icon} className="w-4.5 dark:invert" alt="" />
         <div className="flex flex-col text-sm">
-          <p className="capitalize">credits : {user?.credits}</p>
+          <p className="capitalize dark:invert">credits : {user?.credits}</p>
           <p className="text-sm text-gray-400">
             purchase credits to use quickgpt
           </p>
         </div>
+      </div>
+
+      {/* dark mode toggle  */}
+
+      <div
+        onClick={() => {
+          navigate("/community");
+        }}
+        className="flex items-center justify-between gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md "
+      >
+        <div className="flex items-center gap-2 text-sm">
+          <img src={assets.theme_icon} className="w-4 not-dark:invert" alt="" />
+          <p className="capitalize dark:invert">dark mode</p>
+        </div>
+        <label className="relative cursor-pointer inline-flex">
+          <input
+            onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+            type="checkbox"
+            className="sr-only peer"
+            checked={theme === "dark"}
+          />
+          <div className="w-9 h-5 bg-gray-400 rounded-full peer-checked:bg-purple-600 transition-all"></div>
+          <span className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform peer-checked:translate-x-4"></span>
+        </label>
       </div>
     </div>
   );
