@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext.jsx";
 import { assets } from "../assets/assets.js";
+import moment from "moment";
 
 const Sidebar = () => {
-  const { chats, setSelectedChat, theme, setTheme } = useAppContext();
+  const { chats, setSelectedChat, theme, setTheme, user, navigate } =
+    useAppContext();
   const [search, setSearch] = useState("");
 
   return (
@@ -59,11 +61,47 @@ const Sidebar = () => {
                     : chat.name}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-[#B1A6C0]">
-                  {chat.updatedAt}
+                  {moment(chat.updatedAt).fromNow()}
                 </p>
               </div>
+              <img
+                src={assets.bin_icon}
+                className="hidden group-hover:block w-4 cursor-pointer not-dark:invert"
+              />
             </div>
           ))}
+      </div>
+      {/* community images */}
+      <div
+        onClick={() => {
+          navigate("/community");
+        }}
+        className="flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
+      >
+        <img
+          src={assets.gallery_icon}
+          className="w-4.5 not-dark:invert"
+          alt=""
+        />
+        <div className="flex flex-col text-sm">
+          <p className="capitalize">community images</p>
+        </div>
+      </div>
+
+      {/* credit purchases option */}
+      <div
+        onClick={() => {
+          navigate("/credits");
+        }}
+        className="flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
+      >
+        <img src={assets.diamond_icon} className="w-4.5 dark:invert" alt="" />
+        <div className="flex flex-col text-sm">
+          <p className="capitalize">credits : {user?.credits}</p>
+          <p className="text-sm text-gray-400">
+            purchase credits to use quickgpt
+          </p>
+        </div>
       </div>
     </div>
   );
